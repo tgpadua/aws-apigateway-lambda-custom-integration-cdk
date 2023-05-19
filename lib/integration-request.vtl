@@ -1,0 +1,10 @@
+#set($ips = $input.params().header.get('X-Forwarded-For'))
+#set($ipArray = $ips.split('\,'))
+#set($clientIp = $ipArray[0])
+{
+"body" : $input.body,
+"headers": {
+        "X-Forwarded-For": "$clientIp",
+        "X-Forwarded-For-Original":"$ips"
+    }
+}
